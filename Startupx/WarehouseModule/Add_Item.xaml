@@ -1,0 +1,81 @@
+﻿<Window x:Class="Startupx.WarehouseModule.Add_Item"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Startupx.WarehouseModule"
+        mc:Ignorable="d"
+        Title="Add_Item" Height="470.8" Width="540"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
+    <!--Defining the external Style Sheet-->
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Style.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    
+    <Grid>
+
+        <!--Form Title-->
+        <Label Name="lb_title" Content="ADD ITEM" HorizontalAlignment="Left" Margin="229,24,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="18"/>
+
+        <!--Getting Information controls-->
+        <Label Content="Name" HorizontalAlignment="Left" Margin="67,67,0,0" VerticalAlignment="Top" Width="45" Height="27" RenderTransformOrigin="0.302,-2.274" HorizontalContentAlignment="Right"/>
+        <TextBox x:Name="txt_productName"  HorizontalAlignment="Left" Height="23" Margin="114,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="375" ToolTip="Product name"/>
+
+        <Label Content="Description" HorizontalAlignment="Left" Margin="41,154,0,0" VerticalAlignment="Top" Width="74" Height="27" RenderTransformOrigin="0.302,-2.274" HorizontalContentAlignment="Right"/>
+        <TextBox x:Name="txt_description" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" Margin="114,141,44.6,248.8" Width="375"/>
+
+
+        <Label Content="Price" HorizontalAlignment="Left" Margin="63,107,0,0" VerticalAlignment="Top" Width="45" Height="27" RenderTransformOrigin="0.302,-2.274" HorizontalContentAlignment="Right"/>
+        <TextBox x:Name="txt_productPrice" HorizontalAlignment="Left" Height="23" Margin="114,107,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="87" ToolTip="Product price"/>
+        <Label Content="CAD" HorizontalAlignment="Left" Margin="204,106,0,0" VerticalAlignment="Top" Width="34" Height="27" RenderTransformOrigin="0.302,-2.274"/>
+
+        <Label Content="Expiration date" HorizontalAlignment="Left" Margin="256,106,0,0" VerticalAlignment="Top" Width="93" Height="27" RenderTransformOrigin="0.302,-2.274" HorizontalContentAlignment="Right"/>
+        <DatePicker x:Name="dp_date" HorizontalAlignment="Left" Margin="353,107,0,0" VerticalAlignment="Top" Width="136" />
+
+        <Label Content="Category" HorizontalAlignment="Left" Margin="285,201,0,0" VerticalAlignment="Top" Width="59" Height="26"/>
+        <ComboBox x:Name="cb_category" SelectionChanged="cb_category_SelectionChanged" HorizontalAlignment="Left" Margin="349,202,0,0" VerticalAlignment="Top" Width="109"/>
+       
+        <!--Add Category Button-->
+        <Button Content="" Style="{StaticResource menu_b}" HorizontalAlignment="Left" Margin="461,201,0,0" VerticalAlignment="Top" Width="27" Height="24" Click="Add_Category">
+            <Button.Background>
+                <ImageBrush ImageSource="/Startupx;component/Images/add.png"/>
+            </Button.Background>
+        </Button>
+
+        <Label Content="Brand" HorizontalAlignment="Left" Margin="64,200,0,0" VerticalAlignment="Top" Width="45" Height="27" HorizontalContentAlignment="Right"/>
+        <ComboBox x:Name="cb_brand" HorizontalAlignment="Left" Margin="114,202,0,0" VerticalAlignment="Top" Width="117"/>
+        
+        <!--Add Brand Button-->
+        <Button Content="" Style="{StaticResource menu_b}" HorizontalAlignment="Left" Margin="233,202,0,0" VerticalAlignment="Top" Width="27" Height="24" Click="Add_Brand">
+            <Button.Background>
+                <ImageBrush ImageSource="/Startupx;component/Images/add.png"/>
+            </Button.Background>
+        </Button>
+
+        <!--Loading barcode-->
+        <Image x:Name="img_barcode" HorizontalAlignment="Left" Height="40" Margin="224,245,0,0" VerticalAlignment="Top" Width="127" OpacityMask="#FFF7EDED" />
+        <Label x:Name="lb_barcode" Content="Bar code" HorizontalAlignment="Left" Margin="226,286,0,0" VerticalAlignment="Top" Width="122" FontWeight="Bold" HorizontalContentAlignment="Center"/>
+
+        <Label Content="Warehouse" HorizontalAlignment="Left" Margin="40,316,0,0" VerticalAlignment="Top" Width="69" Height="27" HorizontalContentAlignment="Right"/>
+        <ComboBox x:Name="cb_warehouse" SelectionChanged="cb_warehouse_SelectionChanged" HorizontalAlignment="Left" Margin="114,321,0,0" VerticalAlignment="Top" Width="128" RenderTransformOrigin="0.406,0.902"/>
+
+        <Label Content="Section" HorizontalAlignment="Left" Margin="273,320,0,0" VerticalAlignment="Top" Width="49" Height="27"/>
+        <ComboBox x:Name="cb_section"  HorizontalAlignment="Left" Margin="327,321,0,0" VerticalAlignment="Top" Width="169"/>
+
+
+        <!--Insert Button-->
+        <Button x:Name="bt_insert_button" Content="Insert Item" HorizontalAlignment="Left" Margin="114,371,0,0" VerticalAlignment="Top" Width="381" Height="32" Click="Insert_Item" Background="#458ca2" FontWeight="Bold" Foreground="White"/>
+
+        <!--Update View Button-->
+        <Button Content="" Style="{StaticResource menu_b}" HorizontalAlignment="Left" Margin="462,36,0,0" VerticalAlignment="Top" Width="24" Height="24" Click="Refresh_View">
+            <Button.Background>
+                <ImageBrush ImageSource="/Startupx;component/Images/update.png"/>
+            </Button.Background>
+        </Button>
+     </Grid>
+</Window>

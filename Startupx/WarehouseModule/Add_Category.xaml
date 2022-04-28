@@ -1,0 +1,91 @@
+﻿<Window x:Class="Startupx.WarehouseModule.Add_Category"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Startupx.WarehouseModule"
+        mc:Ignorable="d"
+        Title="Add_Category" Height="466.335" Width="496.583"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
+
+    <!--Defining the external Style Sheet-->
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Style.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid>
+        <!--Dialog Title-->
+        <Label Content="ADD CATEGORY" HorizontalAlignment="Left" Margin="154,13,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="18"/>
+
+        <!--Category Name-->
+        <Label Content="Name" HorizontalAlignment="Left" Margin="25,90,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txt_category" HorizontalAlignment="Left" Height="34" Margin="71,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144"/>
+
+        <!--Category Pref-->
+        <Label Content="Prefix" HorizontalAlignment="Left" Margin="223,89,0,0" VerticalAlignment="Top" Height="30"/>
+        <TextBox x:Name="txt_prefix" HorizontalAlignment="Left" Height="34" Margin="268,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="67"/>
+
+        <!--Add Category Button-->
+        <Button Content="Add Category" HorizontalAlignment="Left" Margin="339,88,0,0" VerticalAlignment="Top" Width="115" Height="34" Click="Add_Category_X" Background="#458ca2" FontWeight="Bold" Foreground="White"/>
+
+        <!--Search bar-->
+        <StackPanel HorizontalAlignment="Center" Height="28" Margin ="130,146,129.4,0" Orientation="Horizontal" VerticalAlignment="Top" Width="231">
+            <TextBox x:Name="txt_search" Width="200" Margin="2,0,0,0" BorderThickness="0,0,0,1" HorizontalAlignment="Right"/>
+            <Button Style="{StaticResource search_b}" Margin="0,4,0,3" Width="20" Height="Auto" RenderTransformOrigin="0.5,0.505" Click="bt_Search_Button" >
+                <Button.Background>
+                    <ImageBrush ImageSource="/images/search.png" Stretch="Fill" />
+                </Button.Background>
+            </Button>
+        </StackPanel>
+
+        <!--Update View Button-->
+        <Button Content="" Style="{StaticResource menu_b}" HorizontalAlignment="Left" Margin="427,195,0,0" VerticalAlignment="Top" Width="24" Height="24" Click="Refresh_View">
+            <Button.Background>
+                <ImageBrush ImageSource="/Startupx;component/Images/update.png"/>
+            </Button.Background>
+        </Button>
+
+        <!--Categories list-->
+        <DataGrid x:Name="dg_categories" HorizontalAlignment="Left" Height="179" Margin="32,233,0,0" VerticalAlignment="Top" Width="427"
+                  ColumnWidth="*" AutoGenerateColumns="False" CanUserAddRows="false">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding id}" Header="Category Id" Width="*" IsReadOnly="True" />
+                <DataGridTextColumn Binding="{Binding category_name}" Header="Category Name" Width="*"  />
+                <DataGridTextColumn Binding="{Binding category_pref}" Header="Prefix" Width="*" />
+                <!--Edit Button-->
+                <DataGridTemplateColumn Header="Update" Width="60" CanUserResize="False">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Style="{StaticResource menu_b}" Click="Update_Category" Width="20" Height="20" >
+                                <Button.Background>
+                                    <ImageBrush ImageSource="/images/edit.png" Stretch="Fill" />
+                                </Button.Background>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <!--Delete Button-->
+                <DataGridTemplateColumn Header="Delete" Width="60" CanUserResize="False">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Style="{StaticResource menu_b}" Click="Delete_Category" Width="20" Height="20" >
+                                <Button.Background>
+                                    <ImageBrush ImageSource="/images/delete.png" Stretch="Fill" />
+                                </Button.Background>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+
+
+    </Grid>
+</Window>

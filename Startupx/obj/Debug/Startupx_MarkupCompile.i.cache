@@ -1,0 +1,20 @@
+﻿Startupx
+
+
+winexe
+C#
+.cs
+D:\Projects MSD\Startupx\Startupx\obj\Debug\
+Startupx
+none
+false
+DEBUG;TRACE
+D:\Projects MSD\Startupx\Startupx\App.xaml
+20-336376194
+
+35-897628852
+24-1921810532
+AdminModule\Add_Permission.xaml;AdminModule\Add_user.xaml;AdminModule\Admin_Index.xaml;AdminModule\Give_Permission_User.xaml;HumanResourcesModule\HumanResourceCapital.xaml;HumanResourcesModule\InsertEmployeeForm.xaml;HumanResourcesModule\ManagePayroll.xaml;HumanResourcesModule\Payroll.xaml;Login\Login_Form.xaml;MainWindow.xaml;Reports\ReportViewer.xaml;Style.xaml;WarehouseModule\Add_Brand.xaml;WarehouseModule\Add_Category.xaml;Incoming\Add_Checkout.xaml;WarehouseModule\Add_Item.xaml;Incoming\BT.xaml;WarehouseModule\Add_Stock.xaml;WarehouseModule\Warehouse_index.xaml;WarehouseModule\W_Report.xaml;
+
+True
+

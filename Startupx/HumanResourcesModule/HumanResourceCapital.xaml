@@ -1,0 +1,152 @@
+﻿<Window x:Class="Startupx.HumanResourceModule.HumanResourceCapital"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Startupx.HumanResourceModule"
+        mc:Ignorable="d"
+        Title="HumanResourceCapital" Height="646.8" Width="950">
+
+
+    <!--Defining the external Style Sheet-->
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Style.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <!--Layout-->
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <!--Logo-->
+        <Image Source="/Images/logo.png" Grid.Column="0" Grid.RowSpan="4" HorizontalAlignment="Left" Height="155" Margin="-53,13,0,0" VerticalAlignment="Top" Width="319" RenderTransformOrigin="0.523,0.395" Grid.ColumnSpan="2" Grid.Row="1">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-90.062"/>
+                    <TranslateTransform X="-45.055" Y="32.479"/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+
+        <!--SideBar-->
+        <StackPanel Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" VerticalAlignment="Top" HorizontalAlignment="Left" Height="126" Width="100" Margin="0.4,69.6,0,0">
+            <Button x:Name="bt_capital" Content="Human Capital" Style="{StaticResource sidebar_b}" Click="bt_capital_Click" Margin="-24,0,0,0" />
+            <Button x:Name="bt_payroll_list" Content="Payroll" Style="{StaticResource sidebar_b}" RenderTransformOrigin="0.492,0.701" Height="30" Click="bt_payroll_list_Click"/>
+            <Button x:Name="bt_Reports" Content="Reports" Style="{StaticResource sidebar_b}" RenderTransformOrigin="0.468,1.413" Height="45" Click="bt_Reports_Click"/>
+        </StackPanel>
+
+        <!--Title-->
+
+        <Label Grid.Column="2" Grid.ColumnSpan="2" Content="Human Resource Module"  Style="{StaticResource title}" Width="303" HorizontalAlignment="Left"/>
+
+        <!--Search bar-->
+        <StackPanel Grid.Column="2" Grid.ColumnSpan="3" HorizontalAlignment="Center"  Height="33" Margin ="0,55,50,0" Orientation="Horizontal" VerticalAlignment="Top" Width="358">
+            <TextBox x:Name="txt_search"  Width="300" BorderThickness="0,0,0,1"  HorizontalAlignment="Center"/>
+            <Button Style="{StaticResource search_b}" Click="bt_Search_Button">
+                <Button.Background>
+                    <ImageBrush ImageSource="/images/search.png" Stretch="Fill" />
+                </Button.Background>
+            </Button>
+        </StackPanel>
+
+        <!--Menu Buttons-->
+        <StackPanel  Grid.Column="5" Height="39" Orientation="Horizontal" Margin="0.267,102,11.067,0" HorizontalAlignment="Center" Width="146" VerticalAlignment="Top" Grid.RowSpan="2">
+            <Button Style="{StaticResource menu_b}" Margin="0,0,10,0.2" x:Name="InsertEmployeeAction" Click="InsertEmployeeAction_Click">
+                <Button.Background>
+                    <ImageBrush  ImageSource="/images/add.png" Stretch="Fill" />
+                </Button.Background>
+            </Button>
+            <Button Style="{StaticResource menu_b}" Click="Print_Event">
+                <Button.Background>
+                    <ImageBrush ImageSource="/images/print.png" Stretch="Fill" />
+                </Button.Background>
+            </Button>
+            <Button x:Name="bt_refresh_view" Content="" Style="{StaticResource menu_b}" Click="bt_refresh_view_Click" ToolTip="Refresh View">
+                <Button.Background>
+                    <ImageBrush ImageSource="/Startupx;component/Images/update.png"/>
+                </Button.Background>
+            </Button>
+        </StackPanel>
+
+        <!--Table-->
+        <StackPanel x:Name="sp_table_container" Grid.Row="1" Grid.Column="1" Grid.RowSpan="4" Grid.ColumnSpan="5" Margin="100.4,69.6,20.067,7.6" Background="LightGray" MinWidth="650" MinHeight="328">
+
+            <DataGrid x:Name="dg_hr_information" IsReadOnly="True" ColumnWidth="*" AutoGenerateColumns="False"  CanUserAddRows="false" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Id}" Header="Employee Id" Width="*" IsReadOnly="True" />
+                    <DataGridTextColumn Binding="{Binding FullName}" Header="Name" Width="*"  />
+                    <DataGridTextColumn Binding="{Binding Gender}" Header="Gender" Width="*" />
+                    <DataGridTextColumn Binding="{Binding Department}" Header="Department" Width="*" />
+                    <DataGridTextColumn Binding="{Binding JobTitle}" Header="Job Title" Width="*" />
+                    <DataGridTextColumn Binding="{Binding Phone}" Header="Department" Width="*" />
+                    <DataGridTextColumn Binding="{Binding Address}" Header="Address" Width="*" />
+                    <DataGridTextColumn Binding="{Binding City}" Header="City Name" Width="*" />
+                    <!--Edit Button-->
+                    <DataGridTemplateColumn Header="Update" Width="40" CanUserResize="False">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Style="{StaticResource menu_b}" Click="Update_Employee" Width="20" Height="20" >
+                                    <Button.Background>
+                                        <ImageBrush ImageSource="/images/edit.png" Stretch="Fill" />
+                                    </Button.Background>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <!--Delete Button-->
+                    <DataGridTemplateColumn Header="Delete" Width="40" CanUserResize="False">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Style="{StaticResource menu_b}" Click="Delete_Employee" Width="20" Height="20" >
+                                    <Button.Background>
+                                        <ImageBrush ImageSource="/images/delete.png" Stretch="Fill" />
+                                    </Button.Background>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <!--Payroll Button-->
+                    <DataGridTemplateColumn Header="Payroll" Width="40" CanUserResize="False">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Style="{StaticResource menu_b}" Click="bt_payroll_Click" Width="20" Height="20" >
+                                    <Button.Background>
+                                        <ImageBrush ImageSource="/images/payroll.png" Stretch="Fill" />
+                                    </Button.Background>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+
+
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+
+        <!--Background-Bottom-->
+        <Image Source="/Images/background_path.png" Grid.Row="4" Grid.ColumnSpan="6" Grid.RowSpan="2" Margin="0,80,0,0" Height="130" Stretch="Fill" VerticalAlignment="Bottom" />
+
+    </Grid>
+</Window>

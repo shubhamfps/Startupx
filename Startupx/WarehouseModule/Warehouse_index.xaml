@@ -1,0 +1,150 @@
+﻿<Window x:Class="Startupx.WarehouseModule.Warehouse_index"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Startupx.WarehouseModule"
+        mc:Ignorable="d"
+        Title="Warehouse_index" Height="646.8" Width="950" WindowStartupLocation="CenterScreen">
+    <!--Defining the external Style Sheet-->
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Style.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <!--Layout-->
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <!--Logo-->
+        <Image Source="/Images/logo.png" Grid.Column="0" Grid.RowSpan="4" HorizontalAlignment="Left" Height="155" Margin="-53,13,0,0" VerticalAlignment="Top" Width="319" RenderTransformOrigin="0.523,0.395" Grid.ColumnSpan="2" Grid.Row="1">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-90.062"/>
+                    <TranslateTransform X="-45.055" Y="32.479"/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+
+        <!--SideBar-->
+        <StackPanel Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" VerticalAlignment="Top" HorizontalAlignment="Left" Height="400" Width="100" Margin="0,70,0,0">
+            <Button x:Name="bt_Products" Content="Products" Style="{StaticResource sidebar_b}" Click="bt_Products_Click"/>
+            <Button x:Name="bt_Categories" Content="Categories" Style="{StaticResource sidebar_b}" Click="bt_Categories_Click"/>
+            <Button x:Name="bt_Brans" Content="Brands" Style="{StaticResource sidebar_b}" Click="bt_Brands_Click"/>
+            <Button x:Name="bt_Reports" Content="Reports" Style="{StaticResource sidebar_b}" Click="bt_Reports_Click"/>
+        </StackPanel>
+
+        <!--Title-->
+        <Label Grid.Column="2" Grid.ColumnSpan="2" Content="Stock Control Module"  Style="{StaticResource title}" Width="303" HorizontalAlignment="Left"/>
+
+        <!--Search bar-->
+        <StackPanel Grid.Column="2" Grid.ColumnSpan="3" HorizontalAlignment="Center"  Height="33" Margin ="0,55,50,0" Orientation="Horizontal" VerticalAlignment="Top" Width="358">
+            <TextBox x:Name="txt_search"  Width="300" BorderThickness="0,0,0,1"  HorizontalAlignment="Center"/>
+            <Button Style="{StaticResource search_b}" Click="bt_Search_Button" >
+                <Button.Background>
+                    <ImageBrush ImageSource="/images/search.png" Stretch="Fill" />
+                </Button.Background>                
+            </Button>
+        </StackPanel>
+
+        <!--Menu Buttons-->
+        <StackPanel  Grid.Column="4" Grid.ColumnSpan="3" Margin="100,0,0,0" Height="39" Orientation="Horizontal" HorizontalAlignment="Center" Width="150" Grid.Row="1" VerticalAlignment="Top">
+            <Button Style="{StaticResource menu_b}" Click="Add_Item" ToolTip="Add product">
+                <Button.Background>
+                    <ImageBrush  ImageSource="/images/add.png" Stretch="Fill" />
+                </Button.Background>                
+            </Button>
+            <Button Style="{StaticResource menu_b}" ToolTip="Print report" Click="Button_Click">
+                <Button.Background>
+                    <ImageBrush ImageSource="/images/print.png" Stretch="Fill"  />
+                </Button.Background>
+            </Button>
+            <!--Update View Button-->
+            <Button Content="" Style="{StaticResource menu_b}" Click="Refresh_View" ToolTip="Refresh View">
+                <Button.Background>
+                    <ImageBrush ImageSource="/Startupx;component/Images/update.png"/>
+                </Button.Background>
+            </Button>
+        </StackPanel>        
+       
+        <!--Table-->
+        <StackPanel x:Name="sp_table_container" Grid.Row="1" Grid.Column="1" Grid.RowSpan="4" Grid.ColumnSpan="5" Margin="115,70,20,20" Background="LightGray" MinWidth="650" MinHeight="328">
+            <DataGrid x:Name="dg_information" IsReadOnly="True" ColumnWidth="*" AutoGenerateColumns="False"  CanUserAddRows="false">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Barcode}" Header="Barcode" Width="*"/>
+                    <DataGridTextColumn Binding="{Binding Name}" Header="Name" Width="*" />
+                    <DataGridTextColumn Binding="{Binding Description}" Header="Description" Width="*" />
+                    <DataGridTextColumn Binding="{Binding Price}" Header="Price" Width="*" />
+                    <DataGridTextColumn Binding="{Binding Date}" Header="Date" Width="*" />
+                    <DataGridTextColumn Binding="{Binding Quantity}" Header="Quantity" Width="*" />
+                    <DataGridTextColumn Binding="{Binding Category}" Header="Category" Width="*" />
+                    <DataGridTextColumn Binding="{Binding Brand}" Header="Brand" Width="*" />
+                    <DataGridTextColumn Binding="{Binding Section}" Header="Section" Width="*" />
+                    <DataGridTextColumn Binding="{Binding Warehouse}" Header="Warehouse" Width="*" />
+                    <!--Edit Button-->
+                    <DataGridTemplateColumn Header="Update" Width="60"  CanUserResize="False">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Style="{StaticResource menu_b}" Click="Update_Item" Width="20" Height="20" >
+                                    <Button.Background>
+                                        <ImageBrush ImageSource="/images/edit.png" Stretch="Fill" />
+                                    </Button.Background>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <!--Delete Button-->
+                    <DataGridTemplateColumn Header="Delete" Width="60" CanUserResize="False">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Style="{StaticResource menu_b}" Click="Delete_Item" Width="20" Height="20" >
+                                    <Button.Background>
+                                        <ImageBrush ImageSource="/images/delete.png" Stretch="Fill" />
+                                    </Button.Background>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <!--Increase Stock Button-->
+                    <DataGridTemplateColumn Header="Delete" Width="60" CanUserResize="False" >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Style="{StaticResource menu_b}" Click="Increase_Stock" Width="20" Height="20" >
+                                    <Button.Background>
+                                        <ImageBrush ImageSource="/images/quantity.png" Stretch="Fill" />
+                                    </Button.Background>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+
+
+        <!--Background-Bottom-->
+        <Image Source="/Images/background_path.png" Grid.Row="4" Grid.ColumnSpan="6" Grid.RowSpan="2" Height="130" Stretch="Fill" VerticalAlignment="Bottom" />
+
+    </Grid>
+</Window>

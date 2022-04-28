@@ -1,0 +1,514 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="business_solutiondb" Class="Startupx_dbDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=sqlserver8935.database.windows.net;Initial Catalog=business_solutiondb;User ID=sqluser8935" SettingsObjectName="Startupx.Properties.Settings" SettingsPropertyName="business_solutiondbConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="business_solutiondb.City" Member="Cities">
+    <Type Name="City">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="city_name" Type="System.String" DbType="NVarChar(45) NOT NULL" CanBeNull="false" />
+      <Column Name="province_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="City_Employee" Member="Employees" ThisKey="id" OtherKey="city_id" Type="Employee" />
+      <Association Name="Province_City" Member="Province" ThisKey="province_id" OtherKey="id" Type="Province" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="business_solutiondb.Warehouse" Member="Warehouses">
+    <Type Name="Warehouse">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+      <Column Name="location" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+      <Association Name="Warehouse_Section" Member="Sections" ThisKey="id" OtherKey="warehouse_id" Type="Section" />
+    </Type>
+  </Table>
+  <Table Name="business_solutiondb.Department" Member="Departments">
+    <Type Name="Department">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="department_name" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+      <Association Name="Department_Employee" Member="Employees" ThisKey="id" OtherKey="department_id" Type="Employee" />
+    </Type>
+  </Table>
+  <Table Name="business_solutiondb.Employee" Member="Employees">
+    <Type Name="Employee">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="first_name" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+      <Column Name="last_name" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+      <Column Name="address" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="phone" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="join_date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="leaving_date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="department_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="salary" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="gender_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="job_title_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="city_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Employee_Salary" Member="Salaries" ThisKey="id" OtherKey="employee_id" Type="Salary" />
+      <Association Name="Employee_User" Member="Users" ThisKey="id" OtherKey="employee_id" Type="User" />
+      <Association Name="City_Employee" Member="City" ThisKey="city_id" OtherKey="id" Type="City" IsForeignKey="true" />
+      <Association Name="Department_Employee" Member="Department" ThisKey="department_id" OtherKey="id" Type="Department" IsForeignKey="true" />
+      <Association Name="Gender_Employee" Member="Gender" ThisKey="gender_id" OtherKey="id" Type="Gender" IsForeignKey="true" />
+      <Association Name="Job_Title_Employee" Member="Job_Title" ThisKey="job_title_id" OtherKey="id" Type="Job_Title" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="business_solutiondb.Gender" Member="Genders">
+    <Type Name="Gender">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="gender_name" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+      <Association Name="Gender_Employee" Member="Employees" ThisKey="id" OtherKey="gender_id" Type="Employee" />
+    </Type>
+  </Table>
+  <Table Name="business_solutiondb.Item_brand" Member="Item_brands">
+    <Type Name="Item_brand">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="brand_name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="Item_brand_Item" Member="Items" ThisKey="id" OtherKey="brand_id" Type="Item" />
+    </Type>
+  </Table>
+  <Table Name="business_solutiondb.Item_category" Member="Item_categories">
+    <Type Name="Item_category">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="category_name" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="category_pref" Type="System.String" DbType="VarChar(3)" CanBeNull="true" />
+      <Association Name="Item_category_Item" Member="Items" ThisKey="id" OtherKey="category_id" Type="Item" />
+    </Type>
+  </Table>
+  <Table Name="business_solutiondb.Job_Title" Member="Job_Titles">
+    <Type Name="Job_Title">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="job_title" Member="job_title1" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+      <Association Name="Job_Title_Employee" Member="Employees" ThisKey="id" OtherKey="job_title_id" Type="Employee" />
+    </Type>
+  </Table>
+  <Table Name="business_solutiondb.Permission" Member="Permissions">
+    <Type Name="Permission">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="Permission_User_has_permission" Member="User_has_permissions" ThisKey="id" OtherKey="permission_id" Type="User_has_permission" />
+    </Type>
+  </Table>
+  <Table Name="business_solutiondb.Province" Member="Provinces">
+    <Type Name="Province">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="province_name" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+      <Association Name="Province_City" Member="Cities" ThisKey="id" OtherKey="province_id" Type="City" />
+    </Type>
+  </Table>
+  <Table Name="business_solutiondb.Salary" Member="Salaries">
+    <Type Name="Salary">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="working_hours" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="gross_salary" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="net_salary" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="salary_ini_period" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="salary_end_period" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="adjustment_percent" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="employee_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Employee_Salary" Member="Employee" ThisKey="employee_id" OtherKey="id" Type="Employee" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="business_solutiondb.Section" Member="Sections">
+    <Type Name="Section">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="section_name" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+      <Column Name="warehouse_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Section_Item" Member="Items" ThisKey="id" OtherKey="section_id" Type="Item" />
+      <Association Name="Warehouse_Section" Member="Warehouse" ThisKey="warehouse_id" OtherKey="id" Type="Warehouse" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="business_solutiondb.[User]" Member="Users">
+    <Type Name="User">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="username" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+      <Column Name="password" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+      <Column Name="employee_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="User_User_has_permission" Member="User_has_permissions" ThisKey="id" OtherKey="user_id" Type="User_has_permission" />
+      <Association Name="User_Invoice" Member="Invoices" ThisKey="id" OtherKey="user_id" Type="Invoice" />
+      <Association Name="Employee_User" Member="Employee" ThisKey="employee_id" OtherKey="id" Type="Employee" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="business_solutiondb.User_has_permission" Member="User_has_permissions">
+    <Type Name="User_has_permission">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="user_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="permission_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="status" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Permission_User_has_permission" Member="Permission" ThisKey="permission_id" OtherKey="id" Type="Permission" IsForeignKey="true" />
+      <Association Name="User_User_has_permission" Member="User" ThisKey="user_id" OtherKey="id" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="business_solutiondb.Report" Member="Reports">
+    <Type Name="Report">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="report_name" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="module" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="business_solutiondb.Invoice_item" Member="Invoice_items">
+    <Type Name="Invoice_item">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="product_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="invoice_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="quant" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Association Name="Invoice_Invoice_item" Member="Invoice" ThisKey="invoice_id" OtherKey="id" Type="Invoice" IsForeignKey="true" />
+      <Association Name="Item_Invoice_item" Member="Item" ThisKey="product_id" OtherKey="id" Type="Item" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="business_solutiondb.Payment_method" Member="Payment_methods">
+    <Type Name="Payment_method">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="payment_type" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+      <Column Name="car_number" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="client_name" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+      <Column Name="invoice_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Invoice_Payment_method" Member="Invoice" ThisKey="invoice_id" OtherKey="id" Type="Invoice" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="business_solutiondb.Invoice" Member="Invoices">
+    <Type Name="Invoice">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="total_amount" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="discount" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="tax" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="user_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="barcode" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="total" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Association Name="Invoice_Invoice_item" Member="Invoice_items" ThisKey="id" OtherKey="invoice_id" Type="Invoice_item" />
+      <Association Name="Invoice_Payment_method" Member="Payment_methods" ThisKey="id" OtherKey="invoice_id" Type="Payment_method" />
+      <Association Name="User_Invoice" Member="User" ThisKey="user_id" OtherKey="id" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="business_solutiondb.Item" Member="Items">
+    <Type Name="Item">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="barcode" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+      <Column Name="price" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="expired_date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="category_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="brand_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="section_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Item_Invoice_item" Member="Invoice_items" ThisKey="id" OtherKey="product_id" Type="Invoice_item" />
+      <Association Name="Item_brand_Item" Member="Item_brand" ThisKey="brand_id" OtherKey="id" Type="Item_brand" IsForeignKey="true" />
+      <Association Name="Item_category_Item" Member="Item_category" ThisKey="category_id" OtherKey="id" Type="Item_category" IsForeignKey="true" />
+      <Association Name="Section_Item" Member="Section" ThisKey="section_id" OtherKey="id" Type="Section" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.sp_cities_by_province" Method="sp_cities_by_province">
+    <Parameter Name="province_name" Type="System.String" DbType="VarChar(45)" />
+    <ElementType Name="sp_cities_by_provinceResult">
+      <Column Name="city_name" Type="System.String" DbType="NVarChar(45) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_department_list" Method="sp_department_list">
+    <ElementType Name="sp_department_listResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="department_name" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_employee_list" Method="sp_employee_list">
+    <ElementType Name="sp_employee_listResult">
+      <Column Name="[Full name]" Member="Full_name" Type="System.String" DbType="NVarChar(91) NOT NULL" CanBeNull="false" />
+      <Column Name="Gender" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+      <Column Name="Department" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+      <Column Name="[Job title]" Member="Job_title" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+      <Column Name="Phone" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="Address" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="City" Type="System.String" DbType="NVarChar(45) NOT NULL" CanBeNull="false" />
+      <Column Name="Province" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_get_citylist" Method="sp_get_citylist">
+    <ElementType Name="sp_get_citylistResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="city_name" Type="System.String" DbType="NVarChar(45) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_get_payroll_for_employee_id" Method="sp_get_payroll_for_employee_id">
+    <Parameter Name="employee_id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="sp_get_payroll_for_employee_idResult">
+      <Column Name="[Employee Number]" Member="Employee_Number" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="[Full Name]" Member="Full_Name" Type="System.String" DbType="NVarChar(91) NOT NULL" CanBeNull="false" />
+      <Column Name="[Working Hours]" Member="Working_Hours" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[Gross Salary]" Member="Gross_Salary" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="[Net Salary]" Member="Net_Salary" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="[Salary Period]" Member="Salary_Period" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="[Adjustment Percent]" Member="Adjustment_Percent" Type="System.Double" DbType="Float" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_insert_employee" Method="sp_insert_employee">
+    <Parameter Name="f_name" Type="System.String" DbType="VarChar(45)" />
+    <Parameter Name="l_name" Type="System.String" DbType="VarChar(45)" />
+    <Parameter Name="address" Type="System.String" DbType="VarChar(45)" />
+    <Parameter Name="phone" Type="System.Int32" DbType="Int" />
+    <Parameter Name="department" Type="System.String" DbType="VarChar(45)" />
+    <Parameter Name="salary" Type="System.Double" DbType="Float" />
+    <Parameter Name="gender" Type="System.String" DbType="VarChar(45)" />
+    <Parameter Name="job_title" Type="System.String" DbType="VarChar(45)" />
+    <Parameter Name="city_name" Type="System.String" DbType="VarChar(45)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_insert_item" Method="sp_insert_item">
+    <Parameter Name="barcode" Type="System.String" DbType="VarChar(45)" />
+    <Parameter Name="name" Type="System.String" DbType="VarChar(45)" />
+    <Parameter Name="description" Type="System.String" DbType="VarChar(45)" />
+    <Parameter Name="price" Type="System.Double" DbType="Float" />
+    <Parameter Name="expired_date" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="category" Type="System.String" DbType="VarChar(45)" />
+    <Parameter Name="brand" Type="System.String" DbType="VarChar(45)" />
+    <Parameter Name="section" Type="System.String" DbType="VarChar(45)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_jobtitle_list" Method="sp_jobtitle_list">
+    <ElementType Name="sp_jobtitle_listResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="job_title" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_renamediagram" Method="sp_renamediagram">
+    <Parameter Name="diagramname" Type="System.String" DbType="NVarChar(128)" />
+    <Parameter Name="owner_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="new_diagramname" Type="System.String" DbType="NVarChar(128)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_sections_by_warehouse" Method="sp_sections_by_warehouse">
+    <Parameter Name="warehouse" Type="System.String" DbType="VarChar(45)" />
+    <ElementType Name="sp_sections_by_warehouseResult">
+      <Column Name="section_name" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.fn_exist_brand" Method="fn_exist_brand" IsComposable="true">
+    <Parameter Name="brand_name" Type="System.String" DbType="VarChar(45)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.fn_exist_category" Method="fn_exist_category" IsComposable="true">
+    <Parameter Name="category_name" Type="System.String" DbType="VarChar(45)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.fn_generate_barcode" Method="fn_generate_barcode" IsComposable="true">
+    <Parameter Name="category_name" Type="System.String" DbType="VarChar(45)" />
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="dbo.sp_update_item" Method="sp_update_item">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="name" Type="System.String" DbType="VarChar(45)" />
+    <Parameter Name="description" Type="System.String" DbType="VarChar(45)" />
+    <Parameter Name="price" Type="System.Double" DbType="Float" />
+    <Parameter Name="expired_date" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="category" Type="System.String" DbType="VarChar(45)" />
+    <Parameter Name="brand" Type="System.String" DbType="VarChar(45)" />
+    <Parameter Name="section" Type="System.String" DbType="VarChar(45)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_employee_list" Method="sp_employee_list1">
+    <ElementType Name="sp_employee_listResult1">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FullName" Type="System.String" DbType="NVarChar(91) NOT NULL" CanBeNull="false" />
+      <Column Name="Gender" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+      <Column Name="Department" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+      <Column Name="JobTitle" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+      <Column Name="Phone" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="Address" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="City" Type="System.String" DbType="NVarChar(45) NOT NULL" CanBeNull="false" />
+      <Column Name="Province" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_employee_list" Method="sp_employee_list2">
+    <ElementType Name="sp_employee_listResult2">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fName" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+      <Column Name="lName" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+      <Column Name="FullName" Type="System.String" DbType="NVarChar(91) NOT NULL" CanBeNull="false" />
+      <Column Name="Gender" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+      <Column Name="Department" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+      <Column Name="JobTitle" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+      <Column Name="Phone" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="Address" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="salary" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="City" Type="System.String" DbType="NVarChar(45) NOT NULL" CanBeNull="false" />
+      <Column Name="Province" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_insert_employee" Method="sp_insert_employee1">
+    <Parameter Name="f_name" Type="System.String" DbType="VarChar(45)" />
+    <Parameter Name="l_name" Type="System.String" DbType="VarChar(45)" />
+    <Parameter Name="address" Type="System.String" DbType="VarChar(45)" />
+    <Parameter Name="phone" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="department" Type="System.String" DbType="VarChar(45)" />
+    <Parameter Name="salary" Type="System.Double" DbType="Float" />
+    <Parameter Name="gender" Type="System.String" DbType="VarChar(45)" />
+    <Parameter Name="job_title" Type="System.String" DbType="VarChar(45)" />
+    <Parameter Name="city_name" Type="System.String" DbType="VarChar(45)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_update_employee" Method="sp_update_employee">
+    <Parameter Name="emp_Id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="f_name" Type="System.String" DbType="VarChar(45)" />
+    <Parameter Name="l_name" Type="System.String" DbType="VarChar(45)" />
+    <Parameter Name="address" Type="System.String" DbType="VarChar(45)" />
+    <Parameter Name="phone" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="department" Type="System.String" DbType="VarChar(45)" />
+    <Parameter Name="salary" Type="System.Double" DbType="Float" />
+    <Parameter Name="gender" Type="System.String" DbType="VarChar(45)" />
+    <Parameter Name="job_title" Type="System.String" DbType="VarChar(45)" />
+    <Parameter Name="city_name" Type="System.String" DbType="VarChar(45)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.fn_login_user" Method="fn_login_user" IsComposable="true">
+    <Parameter Name="user" Type="System.String" DbType="VarChar(45)" />
+    <Parameter Name="password" Type="System.String" DbType="VarChar(45)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.fn_login_user_permission" Method="fn_login_user_permission" IsComposable="true">
+    <Parameter Name="user" Type="System.String" DbType="VarChar(45)" />
+    <Parameter Name="module_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_payroll_list" Method="sp_payroll_list">
+    <ElementType Name="sp_payroll_listResult">
+      <Column Name="EmployeeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SalaryPerHr" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="FullName" Type="System.String" DbType="NVarChar(91) NOT NULL" CanBeNull="false" />
+      <Column Name="PayrollId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="WorkingHours" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="GrossSalary" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="NetSalary" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="SalaryIniPeriod" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="SalaryEndPeriod" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="AdjustmentPercent" Type="System.Double" DbType="Float" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_update_payroll" Method="sp_update_payroll">
+    <Parameter Name="payroll_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="employee_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="working_hours" Type="System.Int32" DbType="Int" />
+    <Parameter Name="gross_salary" Type="System.Double" DbType="Float" />
+    <Parameter Name="net_salary" Type="System.Double" DbType="Float" />
+    <Parameter Name="salary_ini_period" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="salary_end_period" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="adjustment_percent" Type="System.Double" DbType="Float" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_generate_payroll_for_employee_id" Method="sp_generate_payroll_for_employee_id">
+    <Parameter Name="employee_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="working_hours" Type="System.Int32" DbType="Int" />
+    <Parameter Name="gross_salary" Type="System.Double" DbType="Float" />
+    <Parameter Name="net_salary" Type="System.Double" DbType="Float" />
+    <Parameter Name="salary_ini_period" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="salary_end_period" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="adjustment_percent" Type="System.Double" DbType="Float" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.rp_items_by_category" Method="rp_items_by_category">
+    <Parameter Name="category_code" Type="System.String" DbType="VarChar(5)" />
+    <ElementType Name="rp_items_by_categoryResult">
+      <Column Name="Barcode" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+      <Column Name="Price" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="Date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Barcode1" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Category" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="Brand" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Section" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+      <Column Name="Warehouse" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.rp_items_by_brand" Method="rp_items_by_brand">
+    <Parameter Name="brand_name" Type="System.String" DbType="VarChar(45)" />
+    <ElementType Name="rp_items_by_brandResult">
+      <Column Name="Barcode" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+      <Column Name="Price" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="Date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Barcode1" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Category" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="Brand" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Section" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+      <Column Name="Warehouse" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_update_payment_method" Method="sp_update_payment_method">
+    <Parameter Name="invoice_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="name" Type="System.String" DbType="VarChar(45)" />
+    <Parameter Name="card" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="payment" Type="System.String" DbType="VarChar(45)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_insert_permission" Method="sp_insert_permission">
+    <Parameter Name="description" Type="System.String" DbType="VarChar(45)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_insert_user" Method="sp_insert_user">
+    <Parameter Name="username" Type="System.String" DbType="VarChar(45)" />
+    <Parameter Name="password" Type="System.String" DbType="VarChar(45)" />
+    <Parameter Name="employee_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_insert_user_permission" Method="sp_insert_user_permission">
+    <Parameter Name="user_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="permission_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="status" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_list_permission_by_user" Method="sp_list_permission_by_user">
+    <Parameter Name="username" Type="System.String" DbType="VarChar(45)" />
+    <ElementType Name="sp_list_permission_by_userResult">
+      <Column Name="Description" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_remove_permission" Method="sp_remove_permission">
+    <Parameter Name="user_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="description" Type="System.String" DbType="VarChar(45)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp__item_list" Method="sp__item_list">
+    <ElementType Name="sp__item_listResult">
+      <Column Name="Barcode" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+      <Column Name="Price" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="Date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Barcode1" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Category" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="Brand" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Section" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+      <Column Name="Warehouse" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_update_item_stock" Method="sp_update_item_stock">
+    <Parameter Name="barcode" Type="System.String" DbType="VarChar(45)" />
+    <Parameter Name="quantity" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.rp_employee_details_by_id" Method="rp_employee_details_by_id">
+    <Parameter Name="employee_id" Type="System.String" DbType="VarChar(45)" />
+    <ElementType Name="rp_employee_details_by_idResult">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fName" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+      <Column Name="lName" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+      <Column Name="FullName" Type="System.String" DbType="NVarChar(91) NOT NULL" CanBeNull="false" />
+      <Column Name="Gender" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+      <Column Name="Department" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+      <Column Name="JobTitle" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+      <Column Name="Phone" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="Address" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="salary" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="City" Type="System.String" DbType="NVarChar(45) NOT NULL" CanBeNull="false" />
+      <Column Name="Province" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+      <Column Name="PayrollId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="WorkingHours" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="GrossSalary" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="NetSalary" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="SalaryIniPeriod" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="SalaryEndPeriod" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="AdjustmentPercent" Type="System.Double" DbType="Float" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_list_user" Method="sp_list_user">
+    <ElementType Name="sp_list_userResult">
+      <Column Name="Username" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+      <Column Name="Employee" Type="System.String" DbType="NVarChar(90) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+</Database>
